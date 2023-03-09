@@ -39,12 +39,14 @@ class ViewController: UIViewController {
             } else {
                 turnBtn.setTitleColor(.gray, for: .normal)
             }
-            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
+                self?.updateTimer()
+            }
             isCountingDown = true
         }
     }
     
-    @objc func updateTimer() {
+    func updateTimer() {
         countdown -= 1
         if countdown == 0 {
             timer.invalidate()
